@@ -11,7 +11,7 @@ const Login = ({handleLogin}) => {
     e.preventDefault();
     console.log("Form submitted");
     console.log(`Email: ${email}, Password: ${password}`);
-    // handleLogin(email, password);
+    handleLogin(email, password);
 
     setEmail("");
     setPassword("");
