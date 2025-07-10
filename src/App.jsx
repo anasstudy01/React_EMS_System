@@ -7,19 +7,19 @@ import AdminDashbord from "./components/Dashbord/AdminDashbord";
 import { AuthContext } from "./context/AuthProvider";
 
 const App = () => {
-
   const [user, setUser] = useState(null);
-  const data = useContext(AuthContext);
-  console.log("AuthContext data:", data?.employees|| "No data yet");  
-  console.log("AuthContext data:", data?.admin || "Admin data not loaded");
+  const authData = useContext(AuthContext);
+  console.log("Auth Data:", authData);
+  
+
+
+
 
   const handleLogin = (email, password) => {
-    if (email == data.admin[0].email && password == data.admin[0].password) {
-      console.log("admin login");
-      setUser({ email, role: "admin" });
-    } else if (data.employees.find(emp => emp.email === email && emp.password === password)) {
-      console.log("employee login");
-      setUser({ email, role: "employee" });
+    if (email == "admin@me.com" && password == "123") {
+      setUser("admin");
+    } else if (email == "employee@me.com" && password == "123") {
+      setUser("employee");
     } else {
       alert("Invalid credentials");
     }
