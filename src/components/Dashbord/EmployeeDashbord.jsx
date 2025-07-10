@@ -3,12 +3,14 @@ import TaskListNumber from "../other/TaskListNumber";
 import TaskList from "../TaskList/TaskList";
 import Header from "../other/Header";
 
-const EmployeeDashbord = () => {
+const EmployeeDashbord = ({data}) => {
+ console.log("Employee Dashboard Data:", data);
   return (
     <div>
-      <Header />
-      <TaskListNumber />
-      <TaskList />
+      
+      <Header data={data} />
+      <TaskListNumber data={data} />
+      <TaskList data={data} />
     </div>
   );
 };
