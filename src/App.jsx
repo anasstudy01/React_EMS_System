@@ -5,6 +5,7 @@ import EmployeeDashbord from "./components/Dashbord/EmployeeDashbord";
 import AdminDashbord from "./components/Dashbord/AdminDashbord";
 // import { getLocalStorage, setLocalStorage } from "./utils/LocalStorage";
 import { AuthContext } from "./context/AuthProvider";
+import AcceptTask from "./components/TaskList/AcceptTask";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -35,26 +36,38 @@ const App = () => {
       setUser({ role: "admin" });
       localStorage.setItem("loggedInUser", JSON.stringify({ role: "admin" }));
     } else if (authData) {
-      const employee = authData.employees.find((e) => email == e.email && password == e.password);
+      const employee = authData.employees.find(
+        (e) => email == e.email && password == e.password
+      );
       if (employee) {
         setUser({ role: "employee" });
-       
+
         setLoggedInUserData(employee);
-        localStorage.setItem("loggedInUser", JSON.stringify({ role: "employee" }));
-        // localStorage.setItem("loggedInUserData", JSON.stringify(employee));
-     
+        localStorage.setItem(
+          "loggedInUser",
+          JSON.stringify({ role: "employee" })
+        );
+        localStorage.setItem("loggedInUserData", JSON.stringify(employee));
       } else {
         alert("Invalid credentials");
       }
     }
   };
+  const logout = () => {
+    localStorage.removeItem("loggedInUser");
+    localStorage.removeItem("loggedInUserData");
+    setUser(null);
+    setLoggedInUserData(null);
+  };
 
   return (
     <>
       {!user ? <Login handleLogin={handleLogin} /> : ""}
-      {user?.role == 'admin' ?  <AdminDashbord /> : (user?.role == 'employee' ? <EmployeeDashbord data ={loggedInUserData}
-       /> : null)}
-
+      {user?.role == "admin" ? (
+        <AdminDashbord  logout={logout} />
+      ) : user?.role == "employee" ? (
+        <EmployeeDashbord  logout={logout} data={loggedInUserData} />
+      ) : null}
     </>
   );
 };

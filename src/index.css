@@ -6,11 +6,11 @@ body {
   padding: 0;
 }
 
-#tasklistid::-webkit-scrollbar {
+#taskListId::-webkit-scrollbar {
   display: none;
 }
 
-#tasklistid {
+#taskListId {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
